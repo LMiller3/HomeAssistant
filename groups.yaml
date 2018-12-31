@@ -1,0 +1,131 @@
+default_view:
+    view: yes
+    icon: mdi:home 
+    entities:
+      - group.tracking
+      - group.media
+      - group.monitoring
+      - group.automation
+      - sensor.current_version
+      - sensor.random_number
+      - sun.sun
+
+# Media:
+    # name: Media
+    # entities:
+        # - sensor.plex
+
+Monitoring:
+    name: Monitoring
+    entities:
+        - sensor.speedtest_download
+        - sensor.speedtest_upload
+        - sensor.time_online
+
+# Tracking:
+    # name: Tracking
+    # entities:
+        # - sensor.battery_ipad
+
+Automation:
+    name: Automation
+    entities:
+        - automation.check_sensor_value_and_show_notification
+        - automation.reload_groups
+        - automation.restart_hass
+        - automation.send_text_msg
+        - automation.startup_notification
+        - automation.ios_notification
+
+# Cameras
+Cameras:
+    name: Cameras
+    view: yes
+    entities:
+    - camera.living_room_camera
+    - camera.outside_camera
+    
+# Weather Tab      
+Weather:
+    name: Weather
+    view: yes
+    entities:
+        - group.todays_weather
+        - group.day_1_weather
+        - group.day_2_weather
+        - group.day_3_weather
+        - group.day_4_weather
+        - group.day_5_weather
+
+Todays Weather:
+    name: Today's Weather
+    entities:
+        - sensor.weather_day0_condition
+        - sensor.weather_day0_temperature        
+        - sensor.weather_day0_temperature_max
+        - sensor.weather_day0_temperature_min
+        - sensor.weather_day0_wind_speed
+        
+Day 1 Weather:
+    name: Day 1 Weather
+    entities:
+        - sensor.weather_day1_condition
+        - sensor.weather_day1_temperature_max
+        - sensor.weather_day1_temperature_min    
+
+Day 2 Weather:
+    name: Day 2 Weather
+    entities:
+        - sensor.weather_day2_condition       
+        - sensor.weather_day2_temperature_max
+        - sensor.weather_day2_temperature_min     
+
+Day 3 Weather:
+    name: Day 3 Weather
+    entities:
+        - sensor.weather_day3_condition       
+        - sensor.weather_day3_temperature_max
+        - sensor.weather_day3_temperature_min 
+
+Day 4 Weather:
+    name: Day 4 Weather
+    entities:
+        - sensor.weather_day4_condition       
+        - sensor.weather_day4_temperature_max
+        - sensor.weather_day4_temperature_min
+
+Day 5 Weather:
+    name: Day 5 Weather
+    entities:
+        - sensor.weather_day5_condition       
+        - sensor.weather_day5_temperature_max
+        - sensor.weather_day5_temperature_min
+
+# Laurel's Room Tab
+# Laurels Room:
+    # name: Laurel's Room
+    # view: yes
+    # entities:
+        # - light.laurels_room_light_1
+        # - light.laurels_room_light_3
+        # - automation.turn_laurels_lights_on
+        # - automation.turn_laurels_lights_off
+        # - input_number.laurels_room_brightness
+        
+# Living Room Tab
+Living Room:
+    name: Living Room
+    view: yes
+    entities:
+        - light.living_room_lamp      
+        
+# Outside Lights
+Outside Lights:
+    name: Outside Lights
+    view: yes
+    entities:
+    - light.lamp_post_light
+    - light.front_door_light
+    - light.garage_light
+    - automation.turn_on_outside_lights
+    - automation.turn_off_outside_lights
