@@ -1,0 +1,115 @@
+
+# Today's Weather + next 5 days
+  - platform: yweather
+    forecast: 0
+    name: weather_day0
+    monitored_conditions:
+      - weather
+      - temp_min
+      - temp_max
+      - wind_speed
+      - temperature      
+      
+  - platform: yweather
+    forecast: 1
+    name: weather_day1
+    monitored_conditions:
+      - weather
+      - temp_min
+      - temp_max      
+      
+  - platform: yweather
+    forecast: 2
+    name: weather_day2
+    monitored_conditions:
+      - weather
+      - temp_min
+      - temp_max
+      
+  - platform: yweather
+    forecast: 3
+    name: weather_day3
+    monitored_conditions:
+      - weather
+      - temp_min
+      - temp_max      
+      
+  - platform: yweather
+    forecast: 4
+    name: weather_day4
+    monitored_conditions:
+      - weather
+      - temp_min
+      - temp_max      
+      
+  - platform: yweather
+    forecast: 5
+    name: weather_day5
+    monitored_conditions:
+      - weather
+      - temp_min
+      - temp_max
+
+# Random Number Sensor
+  - platform: random
+    name: Random Number
+  
+# Speed Test
+  - platform: speedtest
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+      
+# HA Uptime      
+  - platform: uptime
+    name: Time Online
+    unit_of_measurement: hours      
+
+# Plex      
+  # - platform: plex
+    # host: !secret plex_host
+    # username: !secret plex_username
+    # password: !secret plex_password
+    # token: !secret plex_token
+
+# HA Current Version    
+  - platform: version
+  
+# Date & Time sensor:
+  - platform: time_date
+    display_options:
+      - 'date_time'
+
+# Arlo      
+  - platform: arlo
+    monitored_conditions:
+      - captured_today
+      - last_capture
+      - total_cameras
+      - battery_level
+      - signal_strength   
+
+# iPad Battery
+  # - platform: template
+    # sensors:
+      # battery_ipad:
+        # friendly_name: iPad Battery
+        # # "entity_id:" ensures that this sensor will only update when your device tracker does.
+        # entity_id: device_tracker.laurelsipad
+        # unit_of_measurement: '%'
+        # value_template: >-
+            # {% if states.device_tracker.laurelsipad.attributes.battery %}
+                # {{ states.device_tracker.laurelsipad.attributes.battery|round }}
+            # {% else %}
+                # {{ states.sensor.battery_ipad.state }}
+            # {% endif %}
+        # icon_template: >-
+            # {% set battery_round = states.device_tracker.laurelsipad.attributes.battery|round %}
+            # {% if battery_round >= 100 %}
+              # mdi:battery
+            # {% elif battery_round <= 50 %}
+              # mdi:battery-alert		  
+            # {% else %}
+              # mdi:battery-alert
+            # {% endif %}
