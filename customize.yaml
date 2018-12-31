@@ -1,0 +1,105 @@
+# Laurel's Chromecast
+media_player.laurels_chromecast:
+      friendly_name: Laurel's Chromecast
+      icon: mdi:cast
+      
+sensor.yr_symbol:
+      friendly_name: Weather Forecast
+      entity_picture: //api.met.no/weatherapi/weathericon/1.1/?symbol=46;content_type=image/png
+
+sensor.random_sensor:
+      friendly_name: Random Sensor      
+
+# Speed Test Sensors      
+sensor.speedtest_download:
+       friendly_name: Download Speed
+       icon: mdi:speedometer
+       
+sensor.speedtest_upload:
+       friendly_name: Upload Speed
+       icon: mdi:speedometer
+
+sensor.time_online:
+       friendly_name: Uptime
+       icon: mdi:speedometer
+
+sensor.battery_ipad:
+        icon: mdi:tablet-ipad
+
+# Weather Sensors
+sensor.weather_day0_condition:
+      friendly_name: Today's Condition
+
+sensor.weather_day0_temperature_max:
+      friendly_name: Today's Max Temp
+      
+sensor.weather_day0_temperature_min:
+      friendly_name: Today's Min Temp
+
+sensor.weather_day0_wind_speed:
+      friendly_name: Today's Wind Speed
+      icon: mdi:weather-windy
+
+sensor.weather_day0_temperature:
+      friendly_name: Today's Current Temp      
+
+sensor.weather_day1_condition:
+      friendly_name: Day 1 Condition
+
+sensor.weather_day1_temperature_max:
+      friendly_name: Day 1 Max Temp
+      
+sensor.weather_day1_temperature_min:
+      friendly_name: Day 1 Min Temp    
+
+sensor.weather_day2_condition:
+      friendly_name: Day 2 Condition
+
+sensor.weather_day2_temperature_max:
+      friendly_name: Day 2 Max Temp
+      
+sensor.weather_day2_temperature_min:
+      friendly_name: Day 2 Min Temp     
+
+sensor.weather_day3_condition:
+      friendly_name: Day 3 Condition
+
+sensor.weather_day3_temperature_max:
+      friendly_name: Day 3 Max Temp
+      
+sensor.weather_day3_temperature_min:
+      friendly_name: Day 3 Min Temp     
+
+sensor.weather_day4_condition:
+      friendly_name: Day 4 Condition
+
+sensor.weather_day4_temperature_max:
+      friendly_name: Day 4 Max Temp
+
+sensor.weather_day4_temperature_min:
+      friendly_name: Day 4 Min Temp      
+
+sensor.weather_day5_condition:
+      friendly_name: Day 5 Condition
+
+sensor.weather_day5_temperature_max:
+      friendly_name: Day 5 Max Temp
+
+sensor.weather_day5_temperature_min:
+      friendly_name: Day 5 Min Temp     
+
+# Weather Groups      
+group.current_temperature:
+  order: 1
+group.todays_weather:
+  order: 2
+group.day_1_weather:
+  order: 3
+group.day_2_weather:
+  order: 4
+group.day_3_weather:
+  order: 5
+group.day_4_weather:
+  order: 6
+group.day_5_weather:       
+  order: 7
