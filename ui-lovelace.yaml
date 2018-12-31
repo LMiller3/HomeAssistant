@@ -1,0 +1,193 @@
+title: Laurel's Home
+views:
+  - title: welcome
+    id: welcome
+    background: radial-gradient(crimson, skyblue)
+    theme: dark-mode
+    cards:
+      - type: sensor
+        name: Date
+        entity: sensor.date__time      
+      - type: weather-forecast
+        entity: weather.yweather
+      - type: picture-glance        
+        entities:
+          - camera.living_room_camera
+        camera_image: camera.living_room_camera
+      - type: picture-glance        
+        entities:
+          - camera.outside_camera
+        camera_image: camera.outside_camera        
+
+###################
+#   Cameras Tab   #
+###################
+        
+  - title: Cameras
+    id: cameras
+    background: radial-gradient(crimson, skyblue)
+    theme: dark-mode
+    cards:
+      - type: sensor
+        name: Living Room Camera Battery Level
+        entity: sensor.battery_level_living_room_camera
+      - type: sensor
+        name: Outside Camera Battery Level
+        entity: sensor.battery_level_outside_camera
+      - type: sensor
+        name: Living Room Camera Signal Strength
+        entity: sensor.signal_strength_living_room_camera
+      - type: sensor
+        name: Outside Camera Signal Strength
+        entity: sensor.signal_strength_outside_camera
+
+#####################
+#  Automations Tab  #
+#####################
+         
+  - title: Automations
+    id: automations
+    background: radial-gradient(crimson, skyblue)
+    theme: dark-mode
+    cards:
+      - id: automations 
+        type: entity-filter
+        entities:
+        - automation.check_sensor_value_and_show_notification        
+        - automation.reload_groups
+        - automation.restart_hass
+        - automation.send_text_msg
+        - automation.startup_notification
+        - automation.ios_notification          
+        state_filter:
+          - 'off'
+          - 'on'          
+        card:
+          title: Automations
+      - id: light_automations 
+        type: entity-filter
+        entities:
+        - automation.turn_laurels_lights_on        
+        - automation.turn_laurels_lights_off       
+        state_filter:
+          - 'off'
+          - 'on'          
+        card:
+          title: Light Automations          
+
+##################
+#   Lights Tab   #
+##################
+
+    # View tab title.         
+  - title: Lights
+    # Unique id for direct access /lovelace/${id} and editing it from the UI.  
+    id: outside_lights
+    # Optional background (overwrites the global background).    
+    background: radial-gradient(crimson, skyblue)
+    # Each view can have a different theme applied. Theme should be defined in the frontend.    
+    theme: dark-mode
+    cards:
+        # The filter card will filter entities for their state
+        # Every card needs an ID, for it to be edited from the UI.    
+      - id: outsideLights 
+        type: entity-filter
+        entities:
+          - light.lamp_post_light
+          - light.front_door_light
+          - light.garage_light          
+        state_filter:
+          - 'off'
+          - 'on'
+        card:
+          type: glance
+          title: Outside Lights       
+      - id: insideLights 
+        type: entity-filter
+        entities:
+          - light.spare_bedroom_light
+          - light.living_room_lamp  
+        state_filter:
+          - 'off'
+          - 'on'          
+        card:
+          type: glance
+          title: Inside Lights
+          
+      - type: light
+        entity: light.front_door_light
+      - type: light
+        entity: light.garage_light
+      - type: light
+        entity: light.lamp_post_light
+      - type: light
+        entity: light.spare_bedroom_light
+      - type: light
+        entity: light.living_room_lamp
+
+####################
+#   Switches Tab   #
+####################
+         
+  - title: Switches
+    id: switches
+    background: radial-gradient(crimson, skyblue)
+    theme: dark-mode
+    cards:
+      - type: entity-button
+        entity: switch.outlet      
+          
+####################
+#  Monitoring Tab  #
+####################
+         
+  - title: Monitoring
+    id: monitoring
+    background: radial-gradient(crimson, skyblue)
+    theme: dark-mode
+    cards:
+      - type: sensor
+        name: Upload Time
+        entity: sensor.speedtest_upload
+      - type: sensor
+        name: Download Time      
+        entity: sensor.speedtest_download
+      - type: sensor
+        name: Online Time      
+        entity: sensor.time_online
+        
+################
+#    Map Tab   #
+################
+         
+  - title: Map
+    id: map
+    background: radial-gradient(crimson, skyblue)
+    theme: dark-mode
+    cards:
+      - type: map
+        default_zoom: 15      
+        name: Map
+        entities:
+          - zone.home
+
+
+################
+#  History Tab #
+################
+         
+  - title: History
+    id: history
+    background: radial-gradient(crimson, skyblue)
+    theme: dark-mode
+    cards:
+      - type: history-graph
+        name: History
+        entities:
+          - light.lamp_post_light
+          - light.front_door_light
+          - light.garage_light
+          - light.laurels_room
+          - light.spare_bedroom_light           
+
+       
