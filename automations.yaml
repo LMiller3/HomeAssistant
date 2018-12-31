@@ -1,0 +1,302 @@
+ 
+  - alias: Check sensor value and show notification
+    initial_state: 'off'
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.random_sensor
+      above: 10
+    action:
+      service: persistent_notification.create
+      data:
+        message: "Sensor value greater than 10"
+        
+        
+######################################
+#                                    #
+#      Laurel's Bedrom Lights        #
+#                                    #
+######################################
+
+  - alias: Turn Laurel's Lights On
+    initial_state: 'off'
+    trigger:
+      platform: state
+      entity_id: automation.turn_laurels_lights_on
+      from: 'off'
+      to: 'on'      
+    action:
+      service: homeassistant.turn_on
+      entity_id: light.laurels_room      
+      
+  - alias: Turn Laurel's Lights Off
+    initial_state: 'off'
+    trigger:
+      platform: state
+      entity_id: automation.turn_laurels_lights_off
+      from: 'off'
+      to: 'on'      
+    action:
+      service: homeassistant.turn_off
+      entity_id: light.laurels_room
+
+  - alias: Turn On Outside Lights
+    initial_state: 'off'
+    trigger:
+      platform: state
+      entity_id: automation.turn_on_outside_lights
+      from: 'off'
+      to: 'on'      
+    action:
+      service: homeassistant.turn_on
+      entity_id: group.outside_lights
+
+  - alias: Turn Off Outside Lights
+    initial_state: 'off'
+    trigger:
+      platform: state
+      entity_id: automation.turn_off_outside_lights
+      from: 'on'
+      to: 'off'      
+    action:
+      service: homeassistant.turn_off
+      entity_id: group.outside_lights      
+
+#####################################
+#                                   #
+#      Laurel's Room Brightness     #
+#                                   #
+#####################################
+
+  - alias: Laurel's Room - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.laurels_room_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.laurels_room
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+#############################################
+#                                           #
+#    Turn On Living Room Lamp at 5 pm       #
+#                                           #
+#############################################
+
+  - alias: Turn On Living Room Lamp
+    trigger:
+      platform: time
+      at: '17:00:00'
+    condition:
+      condition: time
+      weekday:
+        - sun
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sat
+    action:
+      - service: light.turn_on
+        entity_id: light.living_room_lamp
+
+#####################################################
+#                                                   #
+#    Turn Off Living Room Lamp Lights at Midnight   #
+#                                                   #
+#####################################################
+
+  - alias: Turn Off Living Room Lamp
+    trigger:
+      platform: time
+      at: '00:00:00'
+    condition:
+      condition: time
+      weekday:
+        - sun
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sat
+    action:
+      - service: light.turn_off
+        entity_id: light.living_room_lamp
+      - service: notify.ios_iphone
+        data:
+          title: "Living Room Lamp Turning Off"
+          message: "Living Room Lamp is turning off..."
+
+#############################################
+#                                           #
+#    Turn On Outside Lights at 5 pm         #
+#                                           #
+#############################################
+
+  - alias: Turn On Outside Lights At Specific Time
+    trigger:
+      platform: time
+      at: '17:00:00'
+    condition:
+      condition: time
+      weekday:
+        - sun
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sat
+    action:
+      - service: light.turn_on
+        entity_id: light.outside_lights
+
+#############################################
+#                                           #
+#    Turn Off Outside Lights at Midnight    #
+#                                           #
+#############################################
+
+  - alias: Turn Off Outside Lights At Specific Time
+    trigger:
+      platform: time
+      at: '00:00:00'
+    condition:
+      condition: time
+      weekday:
+        - sun
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sat
+    action:
+      - service: light.turn_off
+        entity_id: light.outside_lights
+      - service: notify.ios_iphone
+        data:
+          title: "Outside Lights Turning Off"
+          message: "Outside lights are turning off..."           
+      
+# when the restart hass boolean is set to true, restart hass
+  - alias: Restart HASS 
+    hide_entity: False
+    initial_state: 'off'
+    trigger:
+      platform: state
+      entity_id: automation.restart_hass
+      from: 'off'
+      to: 'on'
+    action:
+      service: homeassistant.restart      
+
+# when the reload groups boolean is set to true, reload groups
+  - alias: Reload Groups 
+    hide_entity: False
+    initial_state: 'off'
+    trigger:
+      platform: state
+      entity_id: automation.reload_groups
+      from: 'off'
+      to: 'on'
+    action:
+      service: group.reload
+
+######################################
+#                                    #
+#           IFTTT Stuff              #
+#                                    #
+######################################
+      
+# On start up of home assistant, send txt message to Laurel's Phone      
+  - alias: Startup Notification
+    trigger:
+      platform: homeassistant
+      event: start
+    action:
+      service: ifttt.trigger
+      data: {"event":"Startup Notification"}
+
+## when set to true, send text message to Laurel's phone
+  - alias: Send Text Msg 
+    hide_entity: False
+    initial_state: 'off'
+    trigger:
+      platform: state
+      entity_id: automation.send_text_msg
+      from: 'off'
+      to: 'on'
+    action:
+      service: ifttt.trigger
+      data: {"event":"Send_TxtMsg"}
+      
+######################################
+#                                    #
+#     Trash Day Reminder at 7pm      #
+#                                    #
+######################################
+
+  - alias: Trash Day Reminder
+    trigger:
+      platform: time
+      at: '19:00:00'
+    condition:
+      condition: time
+      weekday:
+        - thu
+    action:
+      service: ifttt.trigger
+      data: {"event":"Trash_Day_Reminder"}
+
+######################################
+#                                    #
+#     iOS Notification Testing       #
+#                                    #
+######################################      
+  - alias: iOS Notification
+    hide_entity: False
+    initial_state: 'off'
+    trigger:
+      platform: state
+      entity_id: automation.ios_notification
+      from: 'off'
+      to: 'on'
+    action:
+      service: notify.ios
+      data:
+        title: "iOS Notification"
+        message: "Laurel Testing..."
+        data:
+          push:
+            badge: 0
+            
+######################################
+#                                    #
+#  Changing HA Theme Based On Sun    #
+#                                    #
+######################################            
+
+  # - alias: Change Theme To Light Mode
+    # trigger:
+      # platform: state
+      # entity_id: sun.sun
+      # from: 'below_horizon'      
+      # to: 'above_horizon'
+    # action:
+      # - service: frontend.set_theme
+        # data:
+          # name: "solarized"
+        
+  # - alias: Change Theme To Dark Mode
+    # trigger:
+      # platform: state
+      # entity_id: sun.sun
+      # from: 'above_horizon'
+      # to: 'below_horizon'
+    # action:
+      # - service: frontend.set_theme
+        # data:
+          # name: "darkcyan"         
