@@ -88,7 +88,17 @@
       - last_capture
       - total_cameras
       - battery_level
-      - signal_strength   
+      - signal_strength
+
+# Dark Sky
+  - platform: darksky
+    api_key: !secret dark_sky_api_key
+    forecast:
+      - 0
+    monitored_conditions:
+      - summary
+      - icon
+      - temperature      
 
 # iPad Battery
   # - platform: template
