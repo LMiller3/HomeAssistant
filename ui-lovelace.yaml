@@ -7,9 +7,9 @@ views:
     cards:
       - type: sensor
         name: Date
-        entity: sensor.date__time      
+        entity: sensor.date_time      
       - type: weather-forecast
-        entity: weather.yweather
+        entity: weather.dark_sky
       - type: picture-glance        
         entities:
           - camera.living_room_camera
