@@ -17,7 +17,41 @@ views:
       - type: picture-glance        
         entities:
           - camera.outside_camera
-        camera_image: camera.outside_camera        
+        camera_image: camera.outside_camera
+
+# https://community.home-assistant.io/t/lovelace-swiper-card/72447?u=frenck
+      - type: custom:swipe-card
+        card_width: '300px'
+        start_card: 2
+        parameters:
+          effect: 'coverflow'
+          grabCursor: true
+          centeredSlides: true
+          slidesPerView: 'auto'
+          coverflowEffect:
+            rotate: 50
+            stretch: 0
+            depth: 100
+            modifier: 1
+            slideShadows : true
+          pagination:
+            type: 'bullets'
+        cards:
+          - type: sensor
+            entity: sensor.dark_sky_temperature
+            name: Current Temperature
+            line_width: 8
+            line_color: '#FF6384'
+          - type: sensor
+            entity: sensor.current_version
+            name: Current Version
+            line_color: '#36A2EB'
+            line_width: 8
+          - type: sensor
+            entity: sensor.date_time
+            name: Date & Time
+            line_color: '#ffce57'
+            line_width: 8      
 
 ###################
 #   Cameras Tab   #
@@ -145,16 +179,39 @@ views:
     id: monitoring
     background: radial-gradient(crimson, skyblue)
     theme: dark-mode
-    cards:
-      - type: sensor
-        name: Upload Time
-        entity: sensor.speedtest_upload
-      - type: sensor
-        name: Download Time      
-        entity: sensor.speedtest_download
-      - type: sensor
-        name: Online Time      
-        entity: sensor.time_online
+    cards:        
+      - type: custom:swipe-card
+        card_width: '400px'
+        start_card: 2
+        parameters:
+          effect: 'coverflow'
+          grabCursor: true
+          centeredSlides: true
+          slidesPerView: 'auto'
+          coverflowEffect:
+            rotate: 50
+            stretch: 0
+            depth: 100
+            modifier: 1
+            slideShadows : true
+          pagination:
+            type: 'bullets'
+        cards:
+          - type: sensor
+            entity: sensor.speedtest_upload
+            name: Upload Time
+            line_width: 8
+            line_color: '#FF6384'
+          - type: sensor
+            entity: sensor.speedtest_download
+            name: Download Time
+            line_color: '#36A2EB'
+            line_width: 8
+          - type: sensor
+            entity: sensor.time_online
+            name: Online Time
+            line_color: '#ffce57'
+            line_width: 8        
         
 ################
 #    Map Tab   #
@@ -188,6 +245,13 @@ views:
           - light.front_door_light
           - light.garage_light
           - light.laurels_room
-          - light.spare_bedroom_light           
+          - light.spare_bedroom_light
+
+resources:
+  - url: https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/swipe-card/swipe-card.min.js
+    type: module
+
+# Documentation Links
+# 1. https://www.awesome-ha.com/#lovelace-ui    
 
        
