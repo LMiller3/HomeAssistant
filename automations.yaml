@@ -79,14 +79,14 @@
           
 #############################################
 #                                           #
-#    Turn On Living Room Lamp at 5 pm       #
+#    Turn On Living Room Lamp at 7 pm       #
 #                                           #
 #############################################
 
   - alias: Turn On Living Room Lamp
     trigger:
       platform: time
-      at: '17:00:00'
+      at: '19:00:00'
     condition:
       condition: time
       weekday:
@@ -131,14 +131,14 @@
 
 #############################################
 #                                           #
-#    Turn On Outside Lights at 5 pm         #
+#    Turn On Outside Lights at 7 pm         #
 #                                           #
 #############################################
 
   - alias: Turn On Outside Lights At Specific Time
     trigger:
       platform: time
-      at: '17:00:00'
+      at: '19:00:00'
     condition:
       condition: time
       weekday:
@@ -152,6 +152,7 @@
     action:
       - service: light.turn_on
         entity_id: light.outside_lights
+        entity_id: light.living_room_lamp
 
 #############################################
 #                                           #
@@ -255,7 +256,8 @@
 #                                    #
 #     iOS Notification Testing       #
 #                                    #
-######################################      
+######################################
+      
   - alias: iOS Notification
     hide_entity: False
     initial_state: 'off'
@@ -273,30 +275,30 @@
           push:
             badge: 0
             
-######################################
-#                                    #
-#  Changing HA Theme Based On Sun    #
-#                                    #
-######################################            
+#########################################
+#                                       #
+#   Enable Living Room Camera at 7 am   #
+#                                       #
+#########################################            
+    
 
-  # - alias: Change Theme To Light Mode
-    # trigger:
-      # platform: state
-      # entity_id: sun.sun
-      # from: 'below_horizon'      
-      # to: 'above_horizon'
-    # action:
-      # - service: frontend.set_theme
-        # data:
-          # name: "solarized"
-        
-  # - alias: Change Theme To Dark Mode
-    # trigger:
-      # platform: state
-      # entity_id: sun.sun
-      # from: 'above_horizon'
-      # to: 'below_horizon'
-    # action:
-      # - service: frontend.set_theme
-        # data:
-          # name: "darkcyan"         
+##########################################
+#                                        #
+#   Disable Living Room Camera at 5 pm   #
+#                                        #
+##########################################            
+      
+
+#################################################
+#                                               #
+#   Button to Enable Living RM Camera Anytime   #
+#                                               #
+#################################################
+      
+
+#################################################
+#                                               #
+#   Button to Disable Living RM Camera Anytime  #
+#                                               #
+#################################################
+   
