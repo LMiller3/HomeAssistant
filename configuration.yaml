@@ -1,0 +1,126 @@
+homeassistant:
+  name: Home
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
+  elevation: 430
+  unit_system: imperial
+  time_zone: America/New_York
+  temperature_unit: F
+  customize: !include customize.yaml
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+sensor: !include sensors.yaml
+# device_tracker: !include device_tracker.yaml
+media_player: !include media_player.yaml
+# zone: !include zones.yaml
+# panel_iframe: !include panels_iframe.yaml
+# input_number: !include input_number.yaml
+input_boolean: !include input_booleans.yaml
+history_graph: !include history_graph.yaml
+# cloud: !include cloud.yaml
+
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+wink:
+
+# The System Health component provides an API to offer 
+# information on the system and its components.
+system_health:
+
+ifttt:
+  key: !secret ifttt_apikey
+
+# Enable Lovelace
+lovelace:
+  mode: yaml
+
+# Weather
+weather:
+  - platform: darksky
+    api_key: !secret dark_sky_api_key
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+# Arlo
+arlo:
+  username: !secret arlo_username
+  password: !secret arlo_password
+
+# Arlo Camera
+camera:
+  - platform: arlo 
+
+# Enables Audio/Video Playback
+ffmpeg:
+
+# Arlo Base Station Control
+alarm_control_panel:
+  - platform: arlo
+  
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret  
+
+mqtt:
+  broker: !secret mqtt_broker
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+
+#Enables IOS Notifications
+ios:
+
+notify:
+  - platform: ios
+    name: ios
+    target: !secret notify_ios_target
+  - name: NOTIFIER_NAME
+    platform: hangouts
+    default_conversations:
+      - id: !secret google_hangouts_conversation_id_1  
+
+# http:
+  # api_password: !secret http_password
+  # base_url: !secret duck_dns_url
+  # ssl_certificate: /ssl/fullchain.pem
+  # ssl_key: /ssl/privkey.pem 
