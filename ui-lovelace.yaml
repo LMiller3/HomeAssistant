@@ -5,21 +5,11 @@ views:
     background: radial-gradient(crimson, skyblue)
     theme: dark-mode
     cards:
-      - type: sensor
-        name: Date
-        entity: sensor.date_time      
-      - type: weather-forecast
+    # weather card
+      - type: custom:weather-card
         entity: weather.dark_sky
-      - type: picture-glance        
-        entities:
-          - camera.living_room_camera
-        camera_image: camera.living_room_camera
-      - type: picture-glance        
-        entities:
-          - camera.outside_camera
-        camera_image: camera.outside_camera
-
-# https://community.home-assistant.io/t/lovelace-swiper-card/72447?u=frenck
+        name: Weather2
+    # swipe card
       - type: custom:swipe-card
         card_width: '300px'
         start_card: 2
@@ -38,11 +28,6 @@ views:
             type: 'bullets'
         cards:
           - type: sensor
-            entity: sensor.dark_sky_temperature
-            name: Current Temperature
-            line_width: 8
-            line_color: '#FF6384'
-          - type: sensor
             entity: sensor.current_version
             name: Current Version
             line_color: '#36A2EB'
@@ -51,7 +36,7 @@ views:
             entity: sensor.date_time
             name: Date & Time
             line_color: '#ffce57'
-            line_width: 8      
+            line_width: 8
 
 ###################
 #   Cameras Tab   #
@@ -62,19 +47,94 @@ views:
     background: radial-gradient(crimson, skyblue)
     theme: dark-mode
     cards:
-      - type: sensor
-        name: Living Room Camera Battery Level
+    # camera feed
+      - type: picture-glance        
+        entities:
+          - camera.living_room_camera
+        camera_image: camera.living_room_camera
+      - type: picture-glance        
+        entities:
+          - camera.outside_camera
+        camera_image: camera.outside_camera
+    # camera battery level
+      - type: custom:bignumber-card
+        title: Living Room Camera Battery Level
         entity: sensor.battery_level_living_room_camera
-      - type: sensor
-        name: Outside Camera Battery Level
+        scale: 30px
+        from: bottom
+        min: 0
+        max: 100
+        severity:
+          - value: 100
+            style: 'var(--label-badge-green)'
+          - value: 70
+            style: 'var(--label-badge-yellow)'
+          - value: 25
+            style: 'var(--label-badge-red)'
+      - type: custom:bignumber-card
+        title: Outside Camera Battery Level
         entity: sensor.battery_level_outside_camera
-      - type: sensor
-        name: Living Room Camera Signal Strength
+        scale: 30px
+        from: bottom
+        min: 0
+        max: 100
+        severity:
+          - value: 100
+            style: 'var(--label-badge-green)'
+          - value: 70
+            style: 'var(--label-badge-yellow)'
+          - value: 25
+            style: 'var(--label-badge-red)'
+      - type: custom:bignumber-card
+        title: Living Room Camera Signal Strength
         entity: sensor.signal_strength_living_room_camera
-      - type: sensor
-        name: Outside Camera Signal Strength
+        scale: 30px
+        from: bottom
+        min: 0
+        max: 5
+        severity:
+          - value: 4
+            style: 'var(--label-badge-green)'
+          - value: 3
+            style: 'var(--label-badge-yellow)'
+          - value: 2
+            style: 'var(--label-badge-red)'
+      - type: custom:bignumber-card
+        title: Outside Camera Signal Strength
         entity: sensor.signal_strength_outside_camera
-
+        scale: 30px
+        from: bottom
+        min: 0
+        max: 5
+        severity:
+          - value: 4
+            style: 'var(--label-badge-green)'
+          - value: 3
+            style: 'var(--label-badge-yellow)'
+          - value: 2
+            style: 'var(--label-badge-red)'
+            
+####################
+#  Thermostat Tab  #
+####################          
+  - title: Thermostat
+    id: thermostat
+    background: radial-gradient(crimson, skyblue)
+    theme: dark-mode
+    cards:
+      - type: custom:simple-thermostat
+        entity: climate.hallway
+        name: Thermostat
+        decimals: 1
+        step_size: 1
+        sensors:
+          - entity: sensor.hallway_thermostat_humidity
+            name: Humidity
+          - attribute: min_temp
+            name: Min Temp
+          - attribute: max_temp
+            name: Max Temp
+            
 #####################
 #  Automations Tab  #
 #####################
@@ -107,7 +167,7 @@ views:
           - 'off'
           - 'on'          
         card:
-          title: Light Automations          
+          title: Light Automations        
 
 ##################
 #   Lights Tab   #
@@ -198,16 +258,6 @@ views:
             type: 'bullets'
         cards:
           - type: sensor
-            entity: sensor.speedtest_upload
-            name: Upload Time
-            line_width: 8
-            line_color: '#FF6384'
-          - type: sensor
-            entity: sensor.speedtest_download
-            name: Download Time
-            line_color: '#36A2EB'
-            line_width: 8
-          - type: sensor
             entity: sensor.time_online
             name: Online Time
             line_color: '#ffce57'
@@ -228,10 +278,9 @@ views:
         entities:
           - zone.home
 
-
-################
-#  History Tab #
-################
+#################
+#  History Tab  #
+#################
          
   - title: History
     id: history
@@ -245,13 +294,22 @@ views:
           - light.front_door_light
           - light.garage_light
           - light.laurels_room
-          - light.spare_bedroom_light
+          - light.spare_bedroom_light          
 
 resources:
   - url: https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/swipe-card/swipe-card.min.js
     type: module
+  - url: /local/bignumber-card.js?v=1
+    type: js
+  - url: /local/weather-card.js
+    type: module
+  - url: /local/simple-thermostat.js?v=1
+    type: module    
 
 # Documentation Links
-# 1. https://www.awesome-ha.com/#lovelace-ui    
+# 1. https://www.awesome-ha.com/#lovelace-ui
+# 2. https://github.com/ciotlosm/custom-lovelace
+# 3. https://community.home-assistant.io/t/lovelace-swiper-card/72447?u=frenck
+# 4. https://github.com/nervetattoo/simple-thermostat
 
        
