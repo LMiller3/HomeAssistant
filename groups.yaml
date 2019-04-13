@@ -44,6 +44,8 @@ Cameras:
     entities:
     - camera.living_room_camera
     - camera.outside_camera
+    - automation.enable_arlo_motion_detection
+    - automation.disable_arlo_motion_detection
     
 # Weather Tab      
 Weather:
