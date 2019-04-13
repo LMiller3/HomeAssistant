@@ -8,16 +8,7 @@ sensor.yr_symbol:
       entity_picture: //api.met.no/weatherapi/weathericon/1.1/?symbol=46;content_type=image/png
 
 sensor.random_sensor:
-      friendly_name: Random Sensor      
-
-# Speed Test Sensors      
-sensor.speedtest_download:
-       friendly_name: Download Speed
-       icon: mdi:speedometer
-       
-sensor.speedtest_upload:
-       friendly_name: Upload Speed
-       icon: mdi:speedometer
+      friendly_name: Random Sensor
 
 sensor.time_online:
        friendly_name: Uptime
