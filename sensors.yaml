@@ -55,11 +55,11 @@
     name: Random Number
   
 # Speed Test
-  - platform: speedtest
-    monitored_conditions:
-      - ping
-      - download
-      - upload
+  # - platform: speedtest
+    # monitored_conditions:
+      # - ping
+      # - download
+      # - upload
       
 # HA Uptime      
   - platform: uptime
