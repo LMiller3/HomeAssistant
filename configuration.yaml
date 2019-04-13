@@ -97,11 +97,13 @@ ffmpeg:
 # Arlo Base Station Control
 alarm_control_panel:
   - platform: arlo
-  
+
+# Nest Thermostat  
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret  
 
+# MQTT
 mqtt:
   broker: !secret mqtt_broker
   username: !secret mqtt_username
@@ -119,8 +121,7 @@ notify:
     default_conversations:
       - id: !secret google_hangouts_conversation_id_1  
 
-# http:
-  # api_password: !secret http_password
-  # base_url: !secret duck_dns_url
-  # ssl_certificate: /ssl/fullchain.pem
-  # ssl_key: /ssl/privkey.pem 
+# Duck DNS      
+duckdns:
+  domain: !secret duck_dns_subdomain
+  access_token: !secret duck_dns_token
